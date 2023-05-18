@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signOut } from "firebase/auth";
 import { getFirestore, collection, query, orderBy, limit, serverTimestamp, addDoc } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -45,10 +45,16 @@ function SignIn() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
   }
+  
+  const signInWithGitHub = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+  }
 
   return (
     <>
       <Button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</Button>
+      <Button className="sign-in" onClick={signInWithGitHub}>Sign in with GitHub</Button>
     </>
   )
 
